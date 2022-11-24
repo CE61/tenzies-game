@@ -72,7 +72,7 @@ export default function App() {
       <div className="game-container">
         <div>
           <h2>{(isNewRecord && tenzies) && "NEW RECORD!"}</h2>
-          <h3>{bestTime && "Best Time: " + bestTime.minutes + " minutes, " + bestTime.seconds + " seconds"}</h3>
+          <h3>{(bestTime && !tenzies)&& "Best Time: " + bestTime.minutes + " minutes, " + bestTime.seconds + " seconds"}</h3>
           <h1 style={{ color: "darkblue" }}>Tenzies!</h1>
           <h2>Click on a die to hold its value. Match all dice to hold the same value to win.</h2>
           <h3>{tenzies ? "The number of rolls you've made is  " + score : "Click the button to reroll the dice."}</h3>
