@@ -28,10 +28,11 @@ export default function App() {
   }, [dice]);
 
   function allNewDice() {
+    const numStringArray = ["one", "two", "three", "four", "five", "six"];
     const newArray = [];
     for (let i = 0; i < 10; i++) {
       const randomNumber = Math.floor(Math.random() * (7 - 1) + 1);
-      newArray.push({ value: randomNumber, isHeld: false, id: nanoid() });
+      newArray.push({ value: randomNumber, isHeld: false, id: nanoid(), diceNum: "dice " + numStringArray[randomNumber - 1] });
     }
     return newArray;
   }
@@ -54,12 +55,16 @@ export default function App() {
       setTime({ minutes: 0, seconds: 0 });
       setScore(0);
     } else {
-      setDice(oldDice => oldDice.map(oldDie => oldDie.isHeld === true ? oldDie : { ...oldDie, value: Math.floor(Math.random() * (7 - 1) + 1) }));
+      setDice(oldDice => oldDice.map(oldDie => {
+        const numStringArray = ["one", "two", "three", "four", "five", "six"];
+        const randomNumber = Math.floor(Math.random() * (7 - 1) + 1);
+        return oldDie.isHeld === true ? oldDie : { ...oldDie, value: randomNumber, diceNum: "dice " + numStringArray[randomNumber - 1] };
+      }));
       setScore(prevScore => prevScore + 1);
     }
   }
 
-  const diceElements = dice.map(dice => <Dice key={dice.id} id={dice.id} value={dice.value} isHeld={dice.isHeld} toggleHeld={toggleHeld} />);
+  const diceElements = dice.map(dice => <Dice key={dice.id} id={dice.id} value={dice.value} isHeld={dice.isHeld} toggleHeld={toggleHeld} diceNum={dice.diceNum} />);
   const isNewRecord = (bestTime === null) || (bestTime.minutes >= time.minutes && bestTime.seconds > time.seconds);
   return (
     <main>
@@ -68,7 +73,7 @@ export default function App() {
         <div>
           <h2>{(isNewRecord && tenzies) && "NEW RECORD!"}</h2>
           <h3>{bestTime && "Best Time: " + bestTime.minutes + " minutes, " + bestTime.seconds + " seconds"}</h3>
-          <h1 style={{color: "darkblue"}}>Tenzies!</h1>
+          <h1 style={{ color: "darkblue" }}>Tenzies!</h1>
           <h2>Click on a die to hold its value. Match all dice to hold the same value to win.</h2>
           <h3>{tenzies ? "The number of rolls you've made is  " + score : "Click the button to reroll the dice."}</h3>
           <h3>{tenzies && "Elapsed Time: " + time.minutes + " minutes, " + time.seconds + " seconds"}</h3>

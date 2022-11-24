@@ -57,13 +57,29 @@ h3{
   justify-content: center;
   align-items: center;
   color: black;
-  font-size: 4vh;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-weight: 700;
-  background-color: whitesmoke;
   border-radius: 10%;
   border: 2px solid gray;
   box-shadow: 2px 2px 2px gray;
+  background-size: cover;
+  background-color: whitesmoke;
+}
+.dice.one{
+  background-image: url("./Images/1.png");
+}
+.dice.two{
+  background-image: url("./Images/2.png");
+}
+.dice.three{
+  background-image: url("./Images/3.png");
+}
+.dice.four{
+  background-image: url("./Images/4.png");
+}
+.dice.five{
+  background-image: url("./Images/5.png");
+}
+.dice.six{
+  background-image: url("./Images/6.png");
 }
 .dice:hover{
   cursor: pointer;
